@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria Feedback</title>
+</head>
+<body>
+    <h1>Welcome to Our Pizzeria!</h1>
+    <h2>Leave Your Feedback</h2>
+    <form method="POST" action="/">
+        {{ form.hidden_tag() }}
+        <p>{{ form.name.label }}: {{ form.name(size=30) }}</p>
+        <p>{{ form.feedback.label }}: {{ form.feedback(rows=5, cols=30) }}</p>
+        <p>{{ form.rating.label }}: {{ form.rating(min=1, max=5) }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li style="color: green;">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <a href="/feedbacks">View Feedbacks</a>
+</body>
+</html>
+
